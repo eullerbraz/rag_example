@@ -1,5 +1,5 @@
 {
-  "name": "rag-example",
+  "name": "rag-example-prepare-data",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,5 +26,11 @@
   "scripts": {
     "dev": "",
     "test": ""
+  },
+  "dependencies": {
+    "@chroma-core/default-embed": "^0.1.9",
+    "cheerio": "^1.1.2",
+    "chromadb": "^3.2.0",
+    "chromadb-default-embed": "^2.14.0"
   }
 }

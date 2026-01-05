@@ -1,0 +1,56 @@
+# Arquivos gerados pelo Chroma DB
+# O Chroma armazena seus dados em um diretório, 
+# que por padrão é 'chroma/' na raiz do seu projeto.
+chroma/
+.chroma/
+
+# Arquivos de ambiente e logs
+# Variáveis de ambiente
+.env
+.flaskenv
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ambientes de Virtualização Python (Conda, Venv)
+# Diretórios de ambientes virtuais
+venv/
+env/
+.venv/
+.direnv/
+pip-log.txt
+pip-delete-this-arg.txt
+
+# Artefatos do Python
+# Arquivos compilados
+__pycache__/
+*.pyc
+*.o
+*.so
+
+# Dados de teste e cobertura (se estiver usando)
+.coverage
+htmlcov/
+.nox/
+.pytest_cache/
+
+# Documentação (gerada)
+/docs/_build/
+
+# Ferramentas de IDE (Ex: VSCode, PyCharm)
+.idea/
+.vscode/
+*.iml
+
+# Notebooks Jupyter/iPython
+# Ignore os arquivos de dados gerados se forem grandes
+.ipynb_checkpoints
+
+# Build/Dist
+dist/
+build/
+*.egg-info/
