@@ -28,9 +28,11 @@
     "test": ""
   },
   "dependencies": {
-    "@langchain/community": "^0.3.0",
-    "@langchain/core": "^0.3.80",
-    "cheerio": "^1.1.2",
-    "langchain": "^0.3.37"
+    "@langchain/community": "^0.3.47",
+    "@langchain/google-genai": "^0.2.14",
+    "cheerio": "^1.1.0",
+    "chromadb": "^2.4.6",
+    "dotenv": "^17.2.3",
+    "langchain": "^0.3.29"
   }
 }
