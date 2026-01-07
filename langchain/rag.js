@@ -4,11 +4,9 @@ import {
   ChatGoogleGenerativeAI,
   GoogleGenerativeAIEmbeddings,
 } from '@langchain/google-genai';
+import { Annotation, StateGraph } from '@langchain/langgraph';
 import { RecursiveCharacterTextSplitter } from '@langchain/textsplitters';
 import { pull } from 'langchain/hub';
-
-import dotenv from 'dotenv';
-dotenv.config();
 
 const url = 'https://eloquentjavascript.net/1st_edition/print.html';
 const cheerioLoader = new CheerioWebBaseLoader(url, { selector: '.block' });
@@ -56,16 +54,30 @@ async function generate(state) {
   });
   const response = await llm.invoke(prompt);
 
-  return response;
+  return { answer: response };
 }
 
 const retrievedDocs = await retrieve({
   question: 'como funciona uma variável?',
 });
 
-console.log(
-  await generate({
-    question: 'como funciona uma variável?',
-    docs: retrievedDocs.docs,
-  })
-);
+const StateAnnotation = Annotation.Root({
+  question: Annotation,
+  docs: Annotation,
+  answer: Annotation,
+});
+
+const graph = new StateGraph(StateAnnotation)
+  .addNode('retrieve', retrieve)
+  .addNode('generate', generate)
+  .addEdge('__start__', 'retrieve')
+  .addEdge('retrieve', 'generate')
+  .addEdge('generate', '__end__')
+  .compile();
+
+async function getAnswer(question) {
+  const inputs = { question: question };
+  return graph.invoke(inputs).then((state) => state.answer.content);
+}
+
+export { getAnswer };
