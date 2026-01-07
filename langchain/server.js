@@ -9,7 +9,6 @@ app.use(express.json());
 const port = 3000;
 
 app.post('/question_answering', async (req, res) => {
-  console.log(req.body.question);
   const answer = await getAnswer(req.body.question);
 
   res.send({ response: answer });

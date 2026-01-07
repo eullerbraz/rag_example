@@ -48,10 +48,26 @@ async function retrieve(state) {
 
 async function generate(state) {
   const docs = state.docs.map((doc) => doc.pageContent).join('\n');
-  const prompt = await promptTemplate.invoke({
-    question: state.question,
-    context: docs,
-  });
+
+  // const prompt = await promptTemplate.invoke({
+  //   question: state.question,
+  //   context: docs,
+  // });
+
+  const prompt = `
+    Você é um expert em Javascript que vai responder a uma pergunta do usuário.
+
+    Responda a pergunta com base nos seguintes trechos retirados do livro "Eloquent Javascript".
+    Referencie em sua resposta os trechos abaixo, deixe explicíto onde começa a referência ao livro.
+    Adicione esses trechos à resposta caso necessário.
+
+    DOCUMENTOS:
+    ${docs}
+
+    PERGUNTA:
+    ${state.question}
+    `;
+
   const response = await llm.invoke(prompt);
 
   return { answer: response };
